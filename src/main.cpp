@@ -302,7 +302,7 @@ int main(int argc, char* argv[]) {
 		cout << endl;
 		mainSharing1DExample();
 		mainSimpleExample();
-		return 0;
+
 		cout << endl;
 		mainHyperCubeExample();
 		cout << endl;
@@ -321,18 +321,7 @@ int main(int argc, char* argv[]) {
 		PlotUtil::plotParallelInsertPerformance<9,64>("./ped09-out-extract.dat", true);
 		PlotUtil::plotParallelInsertPerformance<16,64>("./rea16-out-extract.dat", true);
 
-//		PlotUtil::plotCompareToRTreeBulk<6,64>("./axons.dat", true);
-//		PlotUtil::plotCompareParallelTreeToScanQuery<6,64>("./axons.dat", "./ranges.dat", true);
-//		PlotUtil::plotParallelInsertPerformance<6,64>("/media/max/TOSHIBA/MA/data/ph-tree_workload/100K-axon-mbr-644000.txt", true);
-//		PlotUtil::plotParallelInsertPerformance<3,32>("./benchmark_Java-extract_1M_3D_32bit.dat", false);
-//		PlotUtil::plotInsertPerformanceDifferentOrder<6, 64>("./axons.dat", true);
-//		PlotUtil::plotInsertPerformanceDifferentOrder<3, 32>("./benchmark_Java-extract_1M_3D_32bit.dat", false);
-//		PlotUtil::plotTimeSeriesOfInserts();
-//		PlotUtil::plotAverageInsertTimePerDimensionRandom();
-//		PlotUtil::plotAverageInsertTimePerNumberOfEntriesRandom();
-//		PlotUtil::plotRangeQueryTimePerPercentFilledRandom();
-//		PlotUtil::plotRangeQueryTimePerSelectivityRandom();
-//		PlotUtil::plotAverageInsertTimePerNumberOfEntries<6, 64>("./axons.dat", true);
+
 		return 0;
 	} else if (rand.compare(argv[1]) == 0) {
 		vector<size_t> nEntries;
