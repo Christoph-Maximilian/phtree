@@ -8,7 +8,7 @@
 #ifndef VISITORS_ASSERTIONVISITOR_H_
 #define VISITORS_ASSERTIONVISITOR_H_
 
-#include "visitors/Visitor.h"
+#include "Visitor.h"
 
 template <unsigned int DIM>
 class NodeIterator;
@@ -39,10 +39,10 @@ private:
 
 /* template implemenation */
 #include <assert.h>
-#include "iterators/NodeIterator.h"
-#include "nodes/Node.h"
-#include "nodes/LHC.h"
-#include "nodes/AHC.h"
+#include "../iterators/NodeIterator.h"
+#include "../nodes/Node.h"
+#include "../nodes/LHC.h"
+#include "../nodes/AHC.h"
 
 template <unsigned int DIM>
 AssertionVisitor<DIM>::AssertionVisitor() : Visitor<DIM>() {

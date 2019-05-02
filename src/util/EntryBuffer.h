@@ -9,8 +9,8 @@
 #define SRC_UTIL_ENTRYBUFFER_H_
 
 #include <set>
-#include "Entry.h"
-#include "util/TEntryBuffer.h"
+#include "../Entry.h"
+#include "TEntryBuffer.h"
 #include <atomic>
 
 template <unsigned int DIM>
@@ -65,11 +65,11 @@ private:
 };
 
 #include <assert.h>
-#include "util/MultiDimBitset.h"
-#include "util/NodeTypeUtil.h"
-#include "nodes/Node.h"
-#include "PHTree.h"
-#include "util/EntryBufferPool.h"
+#include "MultiDimBitset.h"
+#include "NodeTypeUtil.h"
+#include "../nodes/Node.h"
+#include "../PHTree.h"
+#include "EntryBufferPool.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 EntryBuffer<DIM, WIDTH>::EntryBuffer() : flushing_(false), nextIndex_(0), inUse(false), suffixBits_(0), pool_(NULL), lcps_(), buffer_(), insertCompleted_() {

@@ -11,7 +11,7 @@
 #include <map>
 #include <vector>
 #include <cstdint>
-#include "nodes/TNode.h"
+#include "TNode.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS, unsigned int N>
 class LHCIterator;
@@ -74,11 +74,11 @@ private:
 
 #include <assert.h>
 #include <utility>
-#include "nodes/AHC.h"
-#include "nodes/LHC.h"
-#include "iterators/LHCIterator.h"
-#include "visitors/Visitor.h"
-#include "util/NodeTypeUtil.h"
+#include "AHC.h"
+#include "LHC.h"
+#include "../iterators/LHCIterator.h"
+#include "../visitors/Visitor.h"
+#include "../util/NodeTypeUtil.h"
 
 using namespace std;
 template <unsigned int DIM, unsigned int PREF_BLOCKS, unsigned int N>

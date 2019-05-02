@@ -8,7 +8,7 @@
 #ifndef SRC_VISITORS_PREFIXSHARINGVISITOR_H_
 #define SRC_VISITORS_PREFIXSHARINGVISITOR_H_
 
-#include "visitors/Visitor.h"
+#include "Visitor.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 class TNode;
@@ -45,7 +45,7 @@ private:
 	void visitGeneral(const TNode<DIM, PREF_BLOCKS>* node);
 };
 
-#include "nodes/TNode.h"
+#include "../nodes/TNode.h"
 
 template <unsigned int DIM>
 PrefixSharingVisitor<DIM>::PrefixSharingVisitor() : Visitor<DIM>() {

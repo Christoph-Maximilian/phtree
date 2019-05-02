@@ -13,10 +13,10 @@
 #define BOOST_THREAD_PROVIDES_SHARED_MUTEX_UPWARDS_CONVERSIONS
 #endif
 
-#include "Entry.h"
-#include "iterators/NodeIterator.h"
-#include "nodes/NodeAddressContent.h"
-#include "util/MultiDimBitset.h"
+#include "../Entry.h"
+#include "../iterators/NodeIterator.h"
+#include "NodeAddressContent.h"
+#include "../util/MultiDimBitset.h"
 #include <pthread.h>
 
 template <unsigned int DIM>

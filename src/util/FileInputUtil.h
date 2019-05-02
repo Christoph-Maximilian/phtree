@@ -31,8 +31,8 @@ public:
 #include <assert.h>
 #include <stdexcept>
 #include <math.h>
-#include "Entry.h"
-#include "util/FileInputUtil.h"
+#include "../Entry.h"
+#include "FileInputUtil.h"
 
 using namespace std;
 
@@ -72,7 +72,7 @@ inline vector<unsigned long> getNextLineTokens(ifstream& stream, unsigned long d
 	stringstream lineStream(line);
 	string cell;
 	vector<unsigned long> tokens;
-	const long double decimalShift = pow10(decimals);
+	const long double decimalShift = pow(decimals, 10);
 
 	while (getline(lineStream, cell, ' ')) {
 		// TODO added a shift

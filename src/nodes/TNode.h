@@ -8,11 +8,11 @@
 #ifndef SRC_NODES_TNODE_H_
 #define SRC_NODES_TNODE_H_
 
-#include "Entry.h"
-#include "iterators/NodeIterator.h"
-#include "nodes/NodeAddressContent.h"
-#include "util/MultiDimBitset.h"
-#include "nodes/Node.h"
+#include "../Entry.h"
+#include "../iterators/NodeIterator.h"
+#include "NodeAddressContent.h"
+#include "../util/MultiDimBitset.h"
+#include "Node.h"
 
 template <unsigned int DIM>
 class Visitor;
@@ -75,11 +75,11 @@ protected:
 
 #include <assert.h>
 #include <stdexcept>
-#include "nodes/LHC.h"
-#include "util/SpatialSelectionOperationsUtil.h"
-#include "iterators/RangeQueryIterator.h"
-#include "iterators/NodeIterator.h"
-#include "nodes/TSuffixStorage.h"
+#include "LHC.h"
+#include "../util/SpatialSelectionOperationsUtil.h"
+#include "../iterators/RangeQueryIterator.h"
+#include "../iterators/NodeIterator.h"
+#include "TSuffixStorage.h"
 
 using namespace std;
 

@@ -9,7 +9,7 @@
 #define VISITORS_COUNTNODETYPESVISITOR_H_
 
 #include <iostream>
-#include "visitors/Visitor.h"
+#include "Visitor.h"
 
 template <unsigned int DIM>
 class CountNodeTypesVisitor: public Visitor<DIM> {

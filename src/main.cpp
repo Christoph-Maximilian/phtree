@@ -19,16 +19,16 @@ using namespace std;
 
 int mainSimpleExample() {
 	const unsigned int bitLength = 8;
-	Entry<2, bitLength> e1({ 74, 21 }, 1);
-	Entry<2, bitLength> e2({ 75, 28 }, 2);
-	Entry<2, bitLength> e3({ 124, 7 }, 3);
-	Entry<2, bitLength> e4({ 65, 19 }, 4);
-	Entry<2, bitLength> e5({ 75, 21 }, 5);
+	Entry<1, bitLength> e1({ 74 }, 1);
+	Entry<1, bitLength> e2({ 75 }, 2);
+	Entry<1, bitLength> e3({ 12 }, 3);
+	Entry<1, bitLength> e4({ 65 }, 4);
+	Entry<1, bitLength> e5({ 75 }, 5);
 
 	cout << "example (points): 2D, bit length: " << bitLength << endl;
-	CountNodeTypesVisitor<2>* visitor = new CountNodeTypesVisitor<2>();
+	CountNodeTypesVisitor<1>* visitor = new CountNodeTypesVisitor<1>();
 	uint64_t sta = RDTSC();
-	PHTree<2, bitLength>* phtree = new PHTree<2, bitLength>();
+	PHTree<1, bitLength>* phtree = new PHTree<1, bitLength>();
 	phtree->insert(e1);
 	cout << "CPU cycles per insert: " << RDTSC() - sta << endl;
 	cout << *phtree;
@@ -77,7 +77,7 @@ int mainSimpleExample() {
 	visitor->reset();
 	phtree->accept(visitor);
 	cout << *visitor << endl;
-
+/*
 	cout << "The following entries are in the range (0,0) - (100,100):" << endl;
 	RangeQueryIterator<2, bitLength>* it = phtree->rangeQuery({0,0}, {100,100});
 	while (it->hasNext()) {
@@ -112,7 +112,7 @@ int mainSimpleExample() {
 
 	delete visitor;
 	delete phtree;
-
+*/
 	return 0;
 }
 
@@ -162,6 +162,7 @@ int mainFull1DExample() {
 			delete it;
 		}
 	}
+	std::cout << "1D Worked";
 
 	delete phtree;
 	return 0;
@@ -193,6 +194,7 @@ int mainSharing1DExample() {
 	points = 0;
 	while (it->hasNext()) {
 		it->next();
+
 		points++;
 	}
 	assert (points == 8);
@@ -294,14 +296,17 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	if (argc != 2 || debug.compare(argv[1]) == 0) {
+		mainBulkExample();
+
 		mainFull1DExample();
 		cout << endl;
 		mainSharing1DExample();
 		mainSimpleExample();
+		return 0;
 		cout << endl;
 		mainHyperCubeExample();
 		cout << endl;
-		mainBulkExample();
+
 		return 0;
 	} else if (plot.compare(argv[1]) == 0) {
 		PlotUtil::plotAverageInsertTimePerDimension<3,64>("./random-extract.dat", false, false);

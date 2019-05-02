@@ -41,9 +41,9 @@ private:
 	inline const Entry<DIM, WIDTH>* lastEntry() const;
 };
 
-#include "nodes/Node.h"
-#include "Entry.h"
-#include "util/MultiDimBitset.h"
+#include "../nodes/Node.h"
+#include "../Entry.h"
+#include "MultiDimBitset.h"
 
 using namespace std;
 

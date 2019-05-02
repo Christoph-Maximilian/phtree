@@ -108,21 +108,21 @@ private:
 #include <cstdlib>
 #include <thread>
 
-#include "Entry.h"
-#include "PHTree.h"
-#include "visitors/CountNodeTypesVisitor.h"
-#include "visitors/AssertionVisitor.h"
-#include "visitors/SizeVisitor.h"
-#include "visitors/SuffixVisitor.h"
-#include "visitors/PrefixSharingVisitor.h"
-#include "util/FileInputUtil.h"
-#include "util/rdtsc.h"
-#include "util/RangeQueryUtil.h"
-#include "util/RandUtil.h"
-#include "util/DynamicNodeOperationsUtil.h"
-#include "util/InsertionThreadPool.h"
-#include "util/compare/ParallelRangeQueryScan.h"
-#include "util/compare/RTreeBulkWrapper.h"
+#include "../Entry.h"
+#include "../PHTree.h"
+#include "../visitors/CountNodeTypesVisitor.h"
+#include "../visitors/AssertionVisitor.h"
+#include "../visitors/SizeVisitor.h"
+#include "../visitors/SuffixVisitor.h"
+#include "../visitors/PrefixSharingVisitor.h"
+#include "FileInputUtil.h"
+#include "rdtsc.h"
+#include "RangeQueryUtil.h"
+#include "RandUtil.h"
+#include "DynamicNodeOperationsUtil.h"
+#include "InsertionThreadPool.h"
+#include "compare/ParallelRangeQueryScan.h"
+#include "compare/RTreeBulkWrapper.h"
 
 using namespace std;
 

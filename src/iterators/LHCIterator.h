@@ -9,8 +9,8 @@
 #define LHCITERATOR_H_
 
 #include <map>
-#include "iterators/NodeIterator.h"
-#include "nodes/LHC.h"
+#include "../iterators/NodeIterator.h"
+#include "../nodes/LHC.h"
 
 template <unsigned int DIM>
 struct NodeAddressContent;
@@ -34,7 +34,7 @@ private:
 };
 
 #include <assert.h>
-#include "iterators/LHCIterator.h"
+#include "LHCIterator.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS, unsigned int N>
 LHCIterator<DIM, PREF_BLOCKS, N>::LHCIterator(const LHC<DIM, PREF_BLOCKS, N>& node) : NodeIterator<DIM>(), node_(&node), currentIndex(0) {

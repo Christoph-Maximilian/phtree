@@ -10,10 +10,10 @@
 
 #include <math.h>
 
-#include "PHTree.h"
-#include "Entry.h"
-#include "iterators/RangeQueryIterator.h"
-#include "util/RandUtil.h"
+#include "../PHTree.h"
+#include "../Entry.h"
+#include "../iterators/RangeQueryIterator.h"
+#include "RandUtil.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 class RangeQueryUtil {

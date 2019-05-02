@@ -8,8 +8,8 @@
 #ifndef SRC_VISITORS_SIZEVISITOR_H_
 #define SRC_VISITORS_SIZEVISITOR_H_
 
-#include "visitors/Visitor.h"
-#include "util/MultiDimBitset.h"
+#include "Visitor.h"
+#include "../util/MultiDimBitset.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 class TNode;
@@ -62,11 +62,11 @@ private:
 	unsigned long superSize(const TNode<DIM, PREF_BLOCKS>* node);
 };
 
-#include "visitors/SizeVisitor.h"
-#include "nodes/Node.h"
-#include "nodes/TNode.h"
-#include "nodes/LHC.h"
-#include "nodes/AHC.h"
+#include "SizeVisitor.h"
+#include "../nodes/Node.h"
+#include "../nodes/TNode.h"
+#include "../nodes/LHC.h"
+#include "../nodes/AHC.h"
 
 using namespace std;
 

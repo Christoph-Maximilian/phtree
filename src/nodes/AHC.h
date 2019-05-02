@@ -11,9 +11,9 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
-#include "nodes/TNode.h"
-#include "iterators/NodeIterator.h"
-#include "nodes/NodeAddressContent.h"
+#include "TNode.h"
+#include "../iterators/NodeIterator.h"
+#include "NodeAddressContent.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 class AHCIterator;
@@ -65,11 +65,11 @@ private:
 };
 
 #include <assert.h>
-#include "nodes/AHC.h"
-#include "iterators/AHCIterator.h"
-#include "iterators/NodeIterator.h"
-#include "nodes/NodeAddressContent.h"
-#include "visitors/Visitor.h"
+//#include "AHC.h"
+#include "../iterators/AHCIterator.h"
+#include "../iterators/NodeIterator.h"
+#include "NodeAddressContent.h"
+#include "../visitors/Visitor.h"
 
 using namespace std;
 

@@ -27,7 +27,7 @@ protected:
 	unsigned long nodeHcAddress;
 };
 
-#include "nodes/Node.h"
+#include "../nodes/Node.h"
 
 using namespace std;
 

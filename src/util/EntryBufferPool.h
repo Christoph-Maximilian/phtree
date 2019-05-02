@@ -45,8 +45,8 @@ private:
 
 #include <assert.h>
 #include <thread>
-#include "util/EntryBuffer.h"
-#include "util/DynamicNodeOperationsUtil.h"
+#include "EntryBuffer.h"
+#include "DynamicNodeOperationsUtil.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 EntryBufferPool<DIM, WIDTH>::EntryBufferPool() :

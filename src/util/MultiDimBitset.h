@@ -81,7 +81,7 @@ unsigned long MultiDimBitset<DIM>::dimBlock = initDimBlock();
 #include <string.h>
 #include <float.h>
 #include <math.h>
-#include "libmorton/include/morton.h"
+#include "../libmorton/include/morton.h"
 
 using namespace std;
 

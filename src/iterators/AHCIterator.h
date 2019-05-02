@@ -8,8 +8,8 @@
 #ifndef AHCITERATOR_H_
 #define AHCITERATOR_H_
 
-#include "nodes/AHC.h"
-#include "iterators/NodeIterator.h"
+#include "../nodes/AHC.h"
+#include "NodeIterator.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 class AHCIterator: public NodeIterator<DIM> {
@@ -30,7 +30,7 @@ private:
 
 #include <stdexcept>
 #include <assert.h>
-#include "nodes/Node.h"
+#include "../nodes/Node.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 AHCIterator<DIM, PREF_BLOCKS>::AHCIterator(const AHC<DIM, PREF_BLOCKS>& node) : NodeIterator<DIM>(), node_(&node) {

@@ -24,8 +24,8 @@ public:
 };
 
 #include <assert.h>
-#include "nodes/Node.h"
-#include "nodes/NodeAddressContent.h"
+#include "../nodes/Node.h"
+#include "../nodes/NodeAddressContent.h"
 
 using namespace std;
 

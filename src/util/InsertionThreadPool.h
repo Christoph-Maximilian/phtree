@@ -17,8 +17,8 @@
 #include <atomic>
 #include <boost/thread/barrier.hpp>
 #include <boost/thread/shared_mutex.hpp>
-#include "util/DeletedNodes.h"
-#include "util/EntryTreeMap.h"
+#include "DeletedNodes.h"
+#include "EntryTreeMap.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 class PHTree;
@@ -86,10 +86,10 @@ private:
 #include <string>
 #include <fstream>
 
-#include "Entry.h"
-#include "util/DynamicNodeOperationsUtil.h"
-#include "util/NodeTypeUtil.h"
-#include "util/EntryBufferPool.h"
+#include "../Entry.h"
+#include "DynamicNodeOperationsUtil.h"
+#include "NodeTypeUtil.h"
+#include "EntryBufferPool.h"
 
 using namespace std;
 

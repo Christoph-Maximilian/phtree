@@ -8,8 +8,8 @@
 #ifndef SRC_ITERATORS_RANGEQUERYSTACKCONTENT_H_
 #define SRC_ITERATORS_RANGEQUERYSTACKCONTENT_H_
 
-#include "nodes/Node.h"
-#include "iterators/NodeIterator.h"
+#include "../nodes/Node.h"
+#include "NodeIterator.h"
 
 template <unsigned int DIM>
 class Node;

@@ -39,11 +39,11 @@ protected:
 };
 
 #include <stdexcept>
-#include "visitors/SizeVisitor.h"
-#include "visitors/PrefixSharingVisitor.h"
-#include "visitors/CountNodeTypesVisitor.h"
-#include "visitors/AssertionVisitor.h"
-#include "visitors/SuffixVisitor.h"
+#include "SizeVisitor.h"
+#include "PrefixSharingVisitor.h"
+#include "CountNodeTypesVisitor.h"
+#include "AssertionVisitor.h"
+#include "SuffixVisitor.h"
 
 template <unsigned int DIM>
 Visitor<DIM>::Visitor() {}

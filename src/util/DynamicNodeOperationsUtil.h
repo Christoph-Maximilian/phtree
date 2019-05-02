@@ -14,9 +14,9 @@
 #endif
 
 #include <atomic>
-#include "nodes/NodeAddressContent.h"
-#include "util/DeletedNodes.h"
-#include "util/EntryTreeMap.h"
+#include "../nodes/NodeAddressContent.h"
+#include "DeletedNodes.h"
+#include "EntryTreeMap.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 class Entry;
@@ -131,15 +131,15 @@ atomic<unsigned long> DynamicNodeOperationsUtil<DIM, WIDTH>::nRestartWriteInsert
 #include <boost/thread/locks.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <pthread.h>
-#include "util/SpatialSelectionOperationsUtil.h"
-#include "util/NodeTypeUtil.h"
-#include "util/MultiDimBitset.h"
-#include "nodes/Node.h"
-#include "nodes/NodeAddressContent.h"
-#include "PHTree.h"
-#include "nodes/TSuffixStorage.h"
-#include "util/EntryBuffer.h"
-#include "util/EntryBufferPool.h"
+#include "SpatialSelectionOperationsUtil.h"
+#include "NodeTypeUtil.h"
+#include "MultiDimBitset.h"
+#include "../nodes/Node.h"
+#include "../nodes/NodeAddressContent.h"
+#include "../PHTree.h"
+#include "../nodes/TSuffixStorage.h"
+#include "EntryBuffer.h"
+#include "EntryBufferPool.h"
 
 // requires upwards conversions of shared mutex
 #define BOOST_THREAD_PROVIDES_SHARED_MUTEX_UPWARDS_CONVERSIONS

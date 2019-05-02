@@ -9,10 +9,10 @@
 #define SRC_UTIL_NODETYPEUTIL_H_
 
 #include <cstdint>
-#include "nodes/LHC.h"
-#include "nodes/AHC.h"
-#include "nodes/SuffixStorage.h"
-#include "util/TEntryBuffer.h"
+#include "../nodes/LHC.h"
+#include "../nodes/AHC.h"
+#include "../nodes/SuffixStorage.h"
+#include "TEntryBuffer.h"
 
 template <unsigned int DIM>
 class Node;

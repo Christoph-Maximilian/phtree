@@ -30,7 +30,7 @@ private:
 	Node<DIM>* buffer_[SIZE];
 };
 
-#include "nodes/Node.h"
+#include "../nodes/Node.h"
 
 using namespace std;
 

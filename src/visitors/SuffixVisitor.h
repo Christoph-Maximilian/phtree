@@ -9,7 +9,7 @@
 #define SRC_VISITORS_SUFFIXVISITOR_H_
 
 
-#include "visitors/Visitor.h"
+#include "Visitor.h"
 
 template <unsigned int DIM, unsigned int PREF_BLOCKS>
 class TNode;
@@ -53,8 +53,8 @@ private:
 	vector<unsigned int> leafFilledSizeHistogram;
 };
 
-#include "nodes/TNode.h"
-#include "iterators/NodeIterator.h"
+#include "../nodes/TNode.h"
+#include "../iterators/NodeIterator.h"
 
 template <unsigned int DIM>
 SuffixVisitor<DIM>::SuffixVisitor() : Visitor<DIM>() {

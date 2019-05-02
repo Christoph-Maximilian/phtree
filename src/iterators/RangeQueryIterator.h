@@ -9,11 +9,11 @@
 #define SRC_ITERATORS_RANGEQUERYITERATOR_H_
 
 #include <stack>
-#include "nodes/Node.h"
-#include "iterators/NodeIterator.h"
-#include "iterators/RangeQueryStackContent.h"
-#include "util/MultiDimBitset.h"
-#include "Entry.h"
+#include "../nodes/Node.h"
+#include "NodeIterator.h"
+#include "RangeQueryStackContent.h"
+#include "../util/MultiDimBitset.h"
+#include "../Entry.h"
 
 template <unsigned int DIM>
 class Node;
@@ -78,8 +78,8 @@ private:
 };
 
 #include <assert.h>
-#include "nodes/NodeAddressContent.h"
-#include "util/SpatialSelectionOperationsUtil.h"
+#include "../nodes/NodeAddressContent.h"
+#include "../util/SpatialSelectionOperationsUtil.h"
 
 using namespace std;
 

@@ -14,8 +14,8 @@
 #include <functional>
 #include <vector>
 #include <atomic>
-#include "Entry.h"
-#include "util/ResultStorage.h"
+#include "../Entry.h"
+#include "ResultStorage.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 class PHTree;
@@ -55,7 +55,7 @@ private:
 using namespace std;
 
 #include <stdexcept>
-#include "PHTree.h"
+#include "../PHTree.h"
 
 template <unsigned int DIM, unsigned int WIDTH>
 RangeQueryThreadPool<DIM, WIDTH>::RangeQueryThreadPool(size_t nAdditionalThreads,
