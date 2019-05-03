@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <fstream>
 #include <algorithm>
-
 #include "../src/Entry.h"
 #include "../src/PHTree.h"
 #include "../src/util/PlotUtil.h"
@@ -14,7 +13,6 @@
 #include "../src/visitors/CountNodeTypesVisitor.h"
 #include "../src/iterators/RangeQueryIterator.h"
 #include "../src/visitors/SizeVisitor.h"
-
 
 class UnitTest : public ::testing::Test {
 public:
@@ -31,21 +29,20 @@ public:
         miniS2QueryCellsNotContained.emplace_back(0b1001110001101000);
         miniS2QueryCellsNotContained.emplace_back(0b1001100001000010);
 
-        for (auto& cell: miniS2Cells) {
+        for (auto &cell: miniS2Cells) {
             uint64_t tmp = cell;
             S2Cells.emplace_back(tmp << 48);
         }
 
-        for (auto& cell: miniS2QueryCells) {
+        for (auto &cell: miniS2QueryCells) {
             uint64_t tmp = cell;
             S2QueryCells.emplace_back(tmp << 48);
         }
 
-        for (auto& cell: miniS2QueryCellsNotContained) {
+        for (auto &cell: miniS2QueryCellsNotContained) {
             uint64_t tmp = cell;
             S2QueryCellsNotContained.emplace_back(tmp << 48);
         }
-
     }
 
     virtual void TearDown() {}
@@ -57,11 +54,9 @@ public:
     std::vector<__uint64_t> S2Cells;
     std::vector<__uint64_t> S2QueryCells;
     std::vector<__uint64_t> S2QueryCellsNotContained;
-
 };
 
 TEST_F(UnitTest, S2Test64bits) {
-
     auto sizeVisitor = new SizeVisitor<1>();
 
     const unsigned int bitLength = 64;
@@ -103,7 +98,6 @@ TEST_F(UnitTest, S2Test64bits) {
 
 
 TEST_F(UnitTest, S2Test16bits) {
-
     auto sizeVisitor = new SizeVisitor<1>();
 
     const unsigned int bitLength = 16;
@@ -140,7 +134,6 @@ TEST_F(UnitTest, S2Test16bits) {
     }
 
     std::cout << sizeVisitor->getTotalByteSize() << " Bytes" << std::endl;
-
 }
 
 int main(int argc, char **argv) {
