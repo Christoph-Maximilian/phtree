@@ -18,7 +18,7 @@ struct NodeAddressContent {
 	bool hasSubnode;
 	bool directlyStoredSuffix;
 	bool hasSpecialPointer;
-	int id;
+	uint64_t id;
 	unsigned long address;
 	union {
 		Node<DIM>* subnode;

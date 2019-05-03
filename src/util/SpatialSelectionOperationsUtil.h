@@ -18,7 +18,7 @@ class Entry;
 template <unsigned int DIM, unsigned int WIDTH>
 class SpatialSelectionOperationsUtil {
 public:
-	static std::pair<bool, int> lookup(const Entry<DIM, WIDTH>& e,
+	static std::pair<bool, uint64_t> lookup(const Entry<DIM, WIDTH>& e,
 			const Node<DIM>* rootNode,
 			std::vector<std::pair<unsigned long, const Node<DIM>*>>* visitedNodes);
 };
@@ -30,7 +30,7 @@ public:
 using namespace std;
 
 template <unsigned int DIM, unsigned int WIDTH>
-pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
+pair<bool, uint64_t> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 		const Entry<DIM, WIDTH>& e,
 		const Node<DIM>* rootNode,
 		vector<pair<unsigned long, const Node<DIM>*>>* visitedNodes) {
@@ -53,7 +53,7 @@ pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 				#ifdef PRINT
 					cout << "prefix mismatch at prefix index " << prefixComp.second << endl;
 				#endif
-				return pair<bool, int>(false, 0);
+				return {false, 0};
 			}
 		}
 
@@ -70,7 +70,7 @@ pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 			#ifdef PRINT
 				cout << "HC address mismatch" << endl;
 			#endif
-			return pair<bool, int>(false, 0);
+			return pair<bool, uint64_t>(false, 0);
 		}
 
 		if (content.hasSubnode) {

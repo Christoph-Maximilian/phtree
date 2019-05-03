@@ -26,46 +26,19 @@ public:
         miniS2QueryCells.emplace_back(0b1001100001110110);
         miniS2QueryCells.emplace_back(0b1001100001101010);
         miniS2QueryCells.emplace_back(0b1001100000000010);
+
+        miniS2QueryCellsNotContained.emplace_back(0b1001100001010010);
+        miniS2QueryCellsNotContained.emplace_back(0b1001110001101000);
+        miniS2QueryCellsNotContained.emplace_back(0b1001100001000010);
     }
 
     virtual void TearDown() {}
 
-    std::vector<__uint16_t > miniS2Cells;
-    std::vector<__uint16_t > miniS2QueryCells;
+    std::vector<__uint16_t> miniS2Cells;
+    std::vector<__uint16_t> miniS2QueryCells;
+    std::vector<__uint16_t> miniS2QueryCellsNotContained;
 
 };
-
-
-TEST_F(UnitTest, ScanTest) {
-    const unsigned int bitLength = 8;
-    auto phtree = new PHTree<1, bitLength>();
-
-    const unsigned long upperBoundary = (1uL << bitLength);
-    for (unsigned long i = 0; i < upperBoundary; ++i) {
-        phtree->insert({i}, static_cast<int>(i*33));
-        assert (phtree->lookup({i}).first);
-        if (phtree->lookup({i}).second != i* 33) {
-            std::cerr << "wrong!" << std::endl;
-        }
-    }
-
-
-    //cout << *phtree;
-    for (unsigned long width = 1; width < upperBoundary; ++width) {
-        for (unsigned long lower = 0; lower < upperBoundary - width; ++lower) {
-            RangeQueryIterator<1, bitLength>* it = phtree->rangeQuery({lower}, {lower + width});
-            unsigned int nIntersects = 0;
-            while (it->hasNext()) {
-                it->next();
-                nIntersects++;
-            }
-
-            assert (nIntersects == (1 + width));
-            delete it;
-        }
-    }
-    delete phtree;
-}
 
 TEST_F(UnitTest, S2Test16bits) {
 
@@ -75,9 +48,9 @@ TEST_F(UnitTest, S2Test16bits) {
     auto phtree = new PHTree<1, bitLength>();
     phtree->accept(sizeVisitor);
 
-    auto counter = 0;
+    uint64_t counter = 0;
 
-    for (auto& s2cell: miniS2Cells) {
+    for (auto &s2cell: miniS2Cells) {
         phtree->insert({s2cell}, static_cast<int>(counter));
         counter++;
     }
@@ -85,19 +58,23 @@ TEST_F(UnitTest, S2Test16bits) {
     std::cout << *phtree << std::endl;
     // NO errors expected here!
     counter = 0;
-    for (auto& s2cell: miniS2Cells) {
+    for (auto &s2cell: miniS2Cells) {
         ASSERT_TRUE(phtree->lookup({s2cell}).first);
-        ASSERT_EQ(phtree->lookup({s2cell}).second, static_cast<int>(counter));
-        if (phtree->lookup({s2cell}).second != static_cast<int>(counter)) {std::cerr << "ERROR!!!" << std::endl;}
+        ASSERT_EQ(phtree->lookup({s2cell}).second, counter);
+        if (phtree->lookup({s2cell}).second != counter) { std::cerr << "ERROR!!!" << std::endl; }
         counter++;
     }
 
     counter = 0;
-    for (auto& s2cell: miniS2QueryCells) {
+    for (auto &s2cell: miniS2QueryCells) {
         ASSERT_TRUE(phtree->lookup({s2cell}).first);
-        ASSERT_EQ(phtree->lookup({s2cell}).second, static_cast<int>(counter));
-        if (phtree->lookup({s2cell}).second != static_cast<int>(counter)) {std::cerr << "ERROR!!!" << std::endl;}
+        ASSERT_EQ(phtree->lookup({s2cell}).second, counter);
+        if (phtree->lookup({s2cell}).second != counter) { std::cerr << "ERROR!!!" << std::endl; }
         counter++;
+    }
+
+    for (auto &s2cell: miniS2QueryCellsNotContained) {
+        ASSERT_FALSE(phtree->lookup({s2cell}).first);
     }
 
     std::cout << sizeVisitor->getTotalByteSize() << " Bytes" << std::endl;
