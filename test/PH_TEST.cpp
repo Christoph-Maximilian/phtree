@@ -30,6 +30,22 @@ public:
         miniS2QueryCellsNotContained.emplace_back(0b1001100001010010);
         miniS2QueryCellsNotContained.emplace_back(0b1001110001101000);
         miniS2QueryCellsNotContained.emplace_back(0b1001100001000010);
+
+        for (auto& cell: miniS2Cells) {
+            uint64_t tmp = cell;
+            S2Cells.emplace_back(tmp << 48);
+        }
+
+        for (auto& cell: miniS2QueryCells) {
+            uint64_t tmp = cell;
+            S2QueryCells.emplace_back(tmp << 48);
+        }
+
+        for (auto& cell: miniS2QueryCellsNotContained) {
+            uint64_t tmp = cell;
+            S2QueryCellsNotContained.emplace_back(tmp << 48);
+        }
+
     }
 
     virtual void TearDown() {}
@@ -38,7 +54,53 @@ public:
     std::vector<__uint16_t> miniS2QueryCells;
     std::vector<__uint16_t> miniS2QueryCellsNotContained;
 
+    std::vector<__uint64_t> S2Cells;
+    std::vector<__uint64_t> S2QueryCells;
+    std::vector<__uint64_t> S2QueryCellsNotContained;
+
 };
+
+TEST_F(UnitTest, S2Test64bits) {
+
+    auto sizeVisitor = new SizeVisitor<1>();
+
+    const unsigned int bitLength = 64;
+    auto phtree = new PHTree<1, bitLength>();
+    phtree->accept(sizeVisitor);
+
+    uint64_t counter = 0;
+
+    for (auto &s2cell: S2Cells) {
+        phtree->insert({s2cell}, static_cast<int>(counter));
+        counter++;
+    }
+
+    std::cout << *phtree << std::endl;
+    // NO errors expected here!
+    counter = 0;
+    for (auto &s2cell: S2Cells) {
+        ASSERT_TRUE(phtree->lookup({s2cell}).first);
+        ASSERT_EQ(phtree->lookup({s2cell}).second, counter);
+        if (phtree->lookup({s2cell}).second != counter) { std::cerr << "ERROR!!!" << std::endl; }
+        counter++;
+    }
+
+    counter = 0;
+    for (auto &s2cell: S2QueryCells) {
+        ASSERT_TRUE(phtree->lookup({s2cell}).first);
+        ASSERT_EQ(phtree->lookup({s2cell}).second, counter);
+        if (phtree->lookup({s2cell}).second != counter) { std::cerr << "ERROR!!!" << std::endl; }
+        counter++;
+    }
+
+    for (auto &s2cell: S2QueryCellsNotContained) {
+        ASSERT_FALSE(phtree->lookup({s2cell}).first);
+    }
+
+    std::cout << sizeVisitor->getTotalByteSize() << " Bytes" << std::endl;
+
+}
+
 
 TEST_F(UnitTest, S2Test16bits) {
 

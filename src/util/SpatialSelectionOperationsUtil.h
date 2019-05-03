@@ -70,7 +70,7 @@ pair<bool, uint64_t> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 			#ifdef PRINT
 				cout << "HC address mismatch" << endl;
 			#endif
-			return pair<bool, uint64_t>(false, 0);
+			return {false, 0};
 		}
 
 		if (content.hasSubnode) {
@@ -84,22 +84,31 @@ pair<bool, uint64_t> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 			lastHcAddress = content.address;
 		} else {
 			const size_t suffixBits = DIM * (WIDTH - index - 1);
-
-
-
-
 			if (suffixBits > 0) {
+				if (WIDTH == 16) {
+					uint16_t postfix = *content.getSuffixStartBlock();
+					uint16_t value = e.values_[0];
+					uint16_t trailing_zeros = __builtin_ctzll(*content.getSuffixStartBlock());
+					uint16_t bit_string = (value << (index + 1));
+					bit_string = bit_string >>  (index + 1);
+					bit_string = bit_string >> (1 + trailing_zeros);
+					if (bit_string == postfix >> (trailing_zeros + 1)) {
+						return {true, content.id};
+					}
+				}
+				if (WIDTH == 64) {
+					uint64_t postfix = *content.getSuffixStartBlock();
+					uint64_t value = e.values_[0];
+					uint64_t trailing_zeros = __builtin_ctzll(*content.getSuffixStartBlock());
+					uint64_t bit_string = (value << (index + 1));
+					bit_string = bit_string >>  (index + 1);
+					bit_string = bit_string >> (1 + trailing_zeros);
+					if (bit_string == postfix >> (trailing_zeros + 1)) {
+						return {true, content.id};
+					}
+				}
 
-                uint16_t postfix = *content.getSuffixStartBlock();
-                uint16_t value = e.values_[0];
-                uint16_t trailing_zeros = __builtin_ctzll(*content.getSuffixStartBlock());
-                uint16_t bit_string = (value << (index + 1));
-                bit_string = bit_string >>  (index + 1);
-                bit_string = bit_string >> (1 + trailing_zeros);
-                if (bit_string == postfix >> (trailing_zeros + 1)) {
-                    return pair<bool, int>(true, content.id);
-                }
-                return pair<bool, int>(false, 0);
+                return {false, 0};
 
 				// validate suffix which is either directly stored or a reference
 				const pair<bool, size_t> suffixComp = MultiDimBitset<DIM>::compare(e.values_, DIM * WIDTH,
@@ -117,7 +126,7 @@ pair<bool, uint64_t> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 				cout << "found" << endl;
 			#endif
 
-			return pair<bool, int>(true, content.id);
+			return {true, content.id};
 		}
 	}
 }
