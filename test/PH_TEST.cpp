@@ -13,13 +13,26 @@
 #include "../src/util/rdtsc.h"
 #include "../src/visitors/CountNodeTypesVisitor.h"
 #include "../src/iterators/RangeQueryIterator.h"
+#include "../src/visitors/SizeVisitor.h"
 
 
 class UnitTest : public ::testing::Test {
 public:
-    virtual void SetUp() {}
+    virtual void SetUp() {
+        miniS2Cells.emplace_back(0b1001100001111000);
+        miniS2Cells.emplace_back(0b1001100001101000);
+        miniS2Cells.emplace_back(0b1001100000100000);
+
+        miniS2QueryCells.emplace_back(0b1001100001110110);
+        miniS2QueryCells.emplace_back(0b1001100001101010);
+        miniS2QueryCells.emplace_back(0b1001100000000010);
+    }
 
     virtual void TearDown() {}
+
+    std::vector<__uint16_t > miniS2Cells;
+    std::vector<__uint16_t > miniS2QueryCells;
+
 };
 
 
@@ -36,7 +49,8 @@ TEST_F(UnitTest, ScanTest) {
         }
     }
 
-    cout << *phtree;
+
+    //cout << *phtree;
     for (unsigned long width = 1; width < upperBoundary; ++width) {
         for (unsigned long lower = 0; lower < upperBoundary - width; ++lower) {
             RangeQueryIterator<1, bitLength>* it = phtree->rangeQuery({lower}, {lower + width});
@@ -53,7 +67,40 @@ TEST_F(UnitTest, ScanTest) {
     delete phtree;
 }
 
-TEST_F(UnitTest, TestOrdering) {
+TEST_F(UnitTest, S2Test16bits) {
+
+    auto sizeVisitor = new SizeVisitor<1>();
+
+    const unsigned int bitLength = 16;
+    auto phtree = new PHTree<1, bitLength>();
+    phtree->accept(sizeVisitor);
+
+    auto counter = 0;
+
+    for (auto& s2cell: miniS2Cells) {
+        phtree->insert({s2cell}, static_cast<int>(counter));
+        counter++;
+    }
+
+    std::cout << *phtree << std::endl;
+    // NO errors expected here!
+    counter = 0;
+    for (auto& s2cell: miniS2Cells) {
+        ASSERT_TRUE(phtree->lookup({s2cell}).first);
+        ASSERT_EQ(phtree->lookup({s2cell}).second, static_cast<int>(counter));
+        if (phtree->lookup({s2cell}).second != static_cast<int>(counter)) {std::cerr << "ERROR!!!" << std::endl;}
+        counter++;
+    }
+
+    counter = 0;
+    for (auto& s2cell: miniS2QueryCells) {
+        ASSERT_TRUE(phtree->lookup({s2cell}).first);
+        ASSERT_EQ(phtree->lookup({s2cell}).second, static_cast<int>(counter));
+        if (phtree->lookup({s2cell}).second != static_cast<int>(counter)) {std::cerr << "ERROR!!!" << std::endl;}
+        counter++;
+    }
+
+    std::cout << sizeVisitor->getTotalByteSize() << " Bytes" << std::endl;
 
 }
 
