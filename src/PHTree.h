@@ -40,16 +40,16 @@ public:
 	explicit PHTree(const PHTree<DIM, WIDTH>& other);
 	virtual ~PHTree();
 	void insert(const Entry<DIM, WIDTH>& e);
-	void insert(const std::vector<unsigned long>& values, uint64_t id);
+	void insert(const std::vector<unsigned long>& values, int id);
 	void parallelInsert(const Entry<DIM,WIDTH>& entry);
 	void parallelBulkInsert(const std::vector<std::vector<unsigned long>>& values, const std::vector<int>* ids = NULL, size_t nThreads = std::thread::hardware_concurrency());
 	void insertHyperRect(const std::vector<unsigned long>& lowerLeftValues, const std::vector<unsigned long>& upperRightValues, int id);
 	void bulkInsert(const std::vector<std::vector<unsigned long>>& values, const std::vector<int>& ids);
 	void bulkInsert(const std::vector<Entry<DIM,WIDTH>>& entries);
 
-	std::pair<bool,uint64_t> lookup(const Entry<DIM, WIDTH>& e) const;
-	std::pair<bool,uint64_t> lookup(const std::vector<unsigned long>& values) const;
-	std::pair<bool,uint64_t> lookupHyperRect(const std::vector<unsigned long>& lowerLeftValues, const std::vector<unsigned long>& upperRightValues) const;
+	std::pair<bool,int> lookup(const Entry<DIM, WIDTH>& e) const;
+	std::pair<bool,int> lookup(const std::vector<unsigned long>& values) const;
+	std::pair<bool,int> lookupHyperRect(const std::vector<unsigned long>& lowerLeftValues, const std::vector<unsigned long>& upperRightValues) const;
 	RangeQueryIterator<DIM, WIDTH>* rangeQuery(const Entry<DIM, WIDTH>& lowerLeft, const Entry<DIM, WIDTH>& upperRight) const;
 	RangeQueryIterator<DIM, WIDTH>* rangeQuery(const std::vector<unsigned long>& lowerLeftValues, const std::vector<unsigned long>& upperRightValues) const;
 	RangeQueryIterator<DIM, WIDTH>* intersectionQuery(const std::vector<unsigned long>& lowerLeftValues, const std::vector<unsigned long>& upperRightValues) const;
@@ -100,7 +100,7 @@ void PHTree<DIM, WIDTH>::insert(const Entry<DIM, WIDTH>& e) {
 }
 
 template <unsigned int DIM, unsigned int WIDTH>
-void PHTree<DIM, WIDTH>::insert(const vector<unsigned long>& values, uint64_t id) {
+void PHTree<DIM, WIDTH>::insert(const vector<unsigned long>& values, int id) {
 	assert (values.size() == DIM);
 	const Entry<DIM, WIDTH> entry(values, id);
 	insert(entry);
@@ -163,7 +163,7 @@ void PHTree<DIM, WIDTH>::insertHyperRect(
 }
 
 template <unsigned int DIM, unsigned int WIDTH>
-pair<bool,uint64_t> PHTree<DIM, WIDTH>::lookup(const Entry<DIM, WIDTH>& e) const {
+pair<bool,int> PHTree<DIM, WIDTH>::lookup(const Entry<DIM, WIDTH>& e) const {
 	#ifdef PRINT
 		cout << "searching: " << e << endl;
 	#endif
@@ -171,13 +171,13 @@ pair<bool,uint64_t> PHTree<DIM, WIDTH>::lookup(const Entry<DIM, WIDTH>& e) const
 }
 
 template <unsigned int DIM, unsigned int WIDTH>
-pair<bool,uint64_t > PHTree<DIM, WIDTH>::lookup(const std::vector<unsigned long>& values) const {
+pair<bool,int > PHTree<DIM, WIDTH>::lookup(const std::vector<unsigned long>& values) const {
 	const Entry<DIM, WIDTH> entry(values, 0);
 	return lookup(entry);
 }
 
 template<unsigned int DIM, unsigned int WIDTH>
-pair<bool, uint64_t> PHTree<DIM, WIDTH>::lookupHyperRect(
+pair<bool, int> PHTree<DIM, WIDTH>::lookupHyperRect(
 		const std::vector<unsigned long>& lowerLeftValues,
 		const std::vector<unsigned long>& upperRightValues) const {
 	assert (DIM % 2 == 0);

@@ -25,16 +25,16 @@ class Entry {
 public:
 
 	Entry();
-	Entry(const std::vector<unsigned long> &values, uint64_t id);
-	Entry(const unsigned long* startBlock, uint64_t id);
+	Entry(const std::vector<unsigned long> &values, int id);
+	Entry(const unsigned long* startBlock, int id);
 	~Entry();
 
-	void reinit(const std::vector<unsigned long> &values, uint64_t id);
+	void reinit(const std::vector<unsigned long> &values, int id);
 
 	size_t getBitLength() const;
 	size_t getDimensions() const;
 
-    uint64_t id_;
+    int id_;
 	unsigned int nBits_;
 	unsigned long values_[1 + (DIM * WIDTH - 1) / (sizeof (unsigned long) * 8)];
 };
@@ -49,14 +49,14 @@ template <unsigned int DIM, unsigned int WIDTH>
 Entry<DIM, WIDTH>::Entry() : id_(0), nBits_(DIM * WIDTH), values_() { }
 
 template <unsigned int DIM, unsigned int WIDTH>
-Entry<DIM, WIDTH>::Entry(const vector<unsigned long> &values, uint64_t id) : id_(id), nBits_(DIM * WIDTH), values_() {
+Entry<DIM, WIDTH>::Entry(const vector<unsigned long> &values, int id) : id_(id), nBits_(DIM * WIDTH), values_() {
 	assert (values.size() == DIM);
 	MultiDimBitset<DIM>::template toBitset<WIDTH>(values, values_);
 	assert (nBits_ == getBitLength() * getDimensions());
 }
 
 template <unsigned int DIM, unsigned int WIDTH>
-Entry<DIM, WIDTH>::Entry(const unsigned long* startBlock, uint64_t id) : id_(id), nBits_(DIM * WIDTH) {
+Entry<DIM, WIDTH>::Entry(const unsigned long* startBlock, int id) : id_(id), nBits_(DIM * WIDTH) {
 	assert (nBits_ > 0);
 	// TODO move logic to multi dim bitset
 	const size_t nBlocks = 1u + (nBits_ - 1u) / (sizeof (unsigned long) * 8u);
@@ -69,7 +69,7 @@ Entry<DIM, WIDTH>::Entry(const unsigned long* startBlock, uint64_t id) : id_(id)
 }
 
 template <unsigned int DIM, unsigned int WIDTH>
-void Entry<DIM, WIDTH>::reinit(const std::vector<unsigned long> &values, uint64_t id) {
+void Entry<DIM, WIDTH>::reinit(const std::vector<unsigned long> &values, int id) {
 	assert (nBits_ == DIM * WIDTH);
 	id_ = id;
 	assert (values.size() == DIM);
