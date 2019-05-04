@@ -7,7 +7,7 @@
 
 #ifndef SRC_UTIL_SPATIALSELECTIONOPERATIONSUTIL_H_
 #define SRC_UTIL_SPATIALSELECTIONOPERATIONSUTIL_H_
-
+#define S2LOOKUP_OPTIMIZED
 #include <vector>
 
 template <unsigned int DIM>
@@ -85,6 +85,7 @@ pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 		} else {
 			const size_t suffixBits = DIM * (WIDTH - index - 1);
 			if (suffixBits > 0) {
+#ifndef S2LOOKUP_OPTIMIZED
 				if (WIDTH == 16) {
 					uint16_t postfix = *content.getSuffixStartBlock();
 					uint16_t value = e.values_[0];
@@ -97,6 +98,7 @@ pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 					}
 				}
 				if (WIDTH == 64) {
+#endif
 					uint64_t postfix = *content.getSuffixStartBlock();
 					uint64_t value = e.values_[0];
 					uint64_t trailing_zeros = __builtin_ctzll(*content.getSuffixStartBlock());
@@ -106,8 +108,9 @@ pair<bool, int> SpatialSelectionOperationsUtil<DIM, WIDTH>::lookup(
 					if (bit_string == postfix >> (trailing_zeros + 1)) {
 						return {true, content.id};
 					}
+#ifndef S2LOOKUP_OPTIMIZED
 				}
-
+#endif
                 return {false, 0};
 
 				// validate suffix which is either directly stored or a reference
